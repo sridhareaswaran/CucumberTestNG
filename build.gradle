@@ -1,0 +1,75 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+
+project.ext {
+    selenium_version = '3.3.1'
+    cucu_Version = '1.2.5'
+    cucu_Java_Version = '1.2.5'
+    cucu_JVM_Version = '1.0.5'
+    cucu_Testng_Version = '1.2.5'
+    cucu_Junit_Version = '1.2.5'
+    Testng_Version = '6.10'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    /**** Selenium ****/
+    compile 'org.seleniumhq.selenium:selenium-java:' + selenium_version
+
+    /**** Cucumber ****/
+    testCompile 'info.cukes:cucumber-java:' + cucu_Java_Version
+    compile 'info.cukes:cucumber-testng:' + cucu_Testng_Version
+    testCompile 'info.cukes:cucumber-junit:' + cucu_Junit_Version
+
+    /**** Reporting ****/
+    compile 'io.magentys:donut:0.0.1'
+    compile 'log4j:log4j:1.2.17'
+
+    /**** Others ****/
+    compile 'org.yaml:snakeyaml:1.17'
+    compile 'com.jayway.restassured:rest-assured:2.7.0'
+
+}
+
+task chrome(type: Test) {
+    System.setProperty("browser", name)
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+    useTestNG() {
+        suites 'src/test/resources/testSuites/ChromeTest.xml'
+    }
+}
+
+task ff(type: Test) {
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+    useTestNG() {
+        suites 'src/test/resources/testSuites/FirefoxTest.xml'
+    }
+}
+
+
+task edge(type: Test) {
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+    useTestNG() {
+        suites 'src/test/resources/testSuites/EdgeTest.xml'
+    }
+}
+
+task cb(type: Test) {
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+    useTestNG() {
+        suites 'src/test/resources/testSuites/CrossBrowserTest.xml'
+    }
+}
+
+configurations.compile.transitive = false
+

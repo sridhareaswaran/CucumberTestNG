@@ -1,0 +1,10 @@
+---
+Versions:
+  chrome  : 2.28      | Supports   55-57
+  gecko   : 0.15.0    | Supports   48+
+  edge    : 3.14393   | Supports   14.14393
+
+URL:
+  chrome  : https://sites.google.com/a/chromium.org/chromedriver/
+  gecko   : https://github.com/mozilla/geckodriver/releases
+  edge    : https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/

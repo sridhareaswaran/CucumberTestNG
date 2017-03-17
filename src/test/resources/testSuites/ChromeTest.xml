@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="CompanyName - Chrome" verbose="1">
+    <test name="chrome">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.sri.testRunners.ChromeTestRunner" />
+        </classes>
+    </test>
+</suite>
