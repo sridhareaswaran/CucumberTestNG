@@ -1,12 +1,15 @@
 ---
 # Choose the ENV to be tested (QA, DEV, STG, INT, PROD)
-TestEnvironment: DEV
+TestEnvironment: QA
 
 # Run tests in (local, remote)
 RunTestsIn: local
 
 # Remote Selenium Grid URL
 GridURL:
+
+# Browser to tested in (chrome, firefox, edge)
+Browser: chrome
 
 # Local browsers driver paths
 chromepath: \src\main\resources\browserDrivers\chromedriver.exe

@@ -10,8 +10,6 @@ import static org.testng.Assert.assertTrue;
  */
 public class resultsPage extends basePage {
 
-    WebDriver driver = getDriver();
-
     public void verifyTitleContains(String text) throws InterruptedException {
         Thread.sleep(2000);
         assertTrue(driver.getTitle().toLowerCase().contains(text.toLowerCase()));

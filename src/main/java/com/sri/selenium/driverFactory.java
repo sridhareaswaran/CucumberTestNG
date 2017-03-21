@@ -2,6 +2,7 @@ package com.sri.selenium;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -13,44 +14,32 @@ import org.openqa.selenium.safari.SafariDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import static com.sri.utils.configReader.BROWSER;
+import static com.sri.utils.configReader.RunTestsIn;
 import static com.sri.utils.configReader.baseConfig_data;
+import static com.sri.utils.logManager.log;
 
 /**
  * Created by sridhar.easwaran on 3/16/2017.
  */
 public class driverFactory {
 
-    public static WebDriver driver;
+    protected static WebDriver driver;
     DesiredCapabilities capabilities;
-    private String ENV;
-    private String RunTestsIn;
     String baseDir = System.getProperty("user.dir");
-
-    private static driverFactory instance = new driverFactory();
-
-    public static driverFactory getInstance()
-    {
-        return instance;
-    }
 
     public static WebDriver getDriver() {
         return driver;
     }
 
-    public void createDriver(String browserType) throws MalformedURLException {
 
-        /** Check ENV setup from command line, if not fetch from config file */
-        if (System.getProperty("env")!= null) {
-            ENV = System.getProperty("env");
-        } else {
-            ENV = baseConfig_data.get("TestEnvironment");
-        }
+    public void createDriver() throws MalformedURLException {
 
-        /** Fetch "RunTestsIn" from config file and create respective driver */
-        RunTestsIn = baseConfig_data.get("RunTestsIn");
-        if (RunTestsIn.equals("local"))
+        String browserType = BROWSER.toLowerCase();
+
+        if (RunTestsIn.equalsIgnoreCase("local"))
             createLocalDriverFor(browserType);
-        else if (RunTestsIn.equals("Remote"))
+        else if (RunTestsIn.equalsIgnoreCase("Remote"))
             createRemoteDriverFor(browserType);
 
     }
@@ -63,15 +52,13 @@ public class driverFactory {
                 driver = new FirefoxDriver();
                 break;
             case "chrome":
+                log.info(">>> creating chrome local driver");
                 System.setProperty("webdriver.chrome.driver", baseDir + baseConfig_data.get("chromepath"));
                 driver = new ChromeDriver();
                 break;
             case "edge":
                 System.setProperty("webdriver.edge.driver", baseDir + baseConfig_data.get("edgepath"));
-                driver = new InternetExplorerDriver();
-                break;
-            case "htmlunit":
-                driver = new HtmlUnitDriver();
+                driver = new EdgeDriver();
                 break;
             case "opera":
                 driver = new OperaDriver();
@@ -89,6 +76,7 @@ public class driverFactory {
 
         switch (browserType) {
             case "chrome":
+                log.info(">>> creating chrome remote driver");
                 capabilities = DesiredCapabilities.chrome();
                 driver = new RemoteWebDriver(remoteURL, capabilities);
                 break;

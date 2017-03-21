@@ -4,13 +4,13 @@ apply plugin: 'idea'
 sourceCompatibility = 1.8
 
 project.ext {
-    selenium_version = '3.3.1'
-    cucu_Version = '1.2.5'
-    cucu_Java_Version = '1.2.5'
-    cucu_JVM_Version = '1.0.5'
-    cucu_Testng_Version = '1.2.5'
-    cucu_Junit_Version = '1.2.5'
-    Testng_Version = '6.10'
+    seleniumVersion = '3.3.1'
+    cucuVersion = '1.2.5'
+    cucuJavaVersion = '1.2.5'
+    cucuJVMVersion = '1.0.5'
+    cucuTestngVersion = '1.2.5'
+    cucuJunitVersion = '1.2.5'
+    TestngVersion = '6.10'
 }
 
 repositories {
@@ -20,12 +20,12 @@ repositories {
 dependencies {
 
     /**** Selenium ****/
-    compile 'org.seleniumhq.selenium:selenium-java:' + selenium_version
+    compile 'org.seleniumhq.selenium:selenium-java:' + seleniumVersion
 
     /**** Cucumber ****/
-    testCompile 'info.cukes:cucumber-java:' + cucu_Java_Version
-    compile 'info.cukes:cucumber-testng:' + cucu_Testng_Version
-    testCompile 'info.cukes:cucumber-junit:' + cucu_Junit_Version
+    testCompile 'info.cukes:cucumber-java:' + cucuJavaVersion
+    compile 'info.cukes:cucumber-testng:' + cucuTestngVersion
+    testCompile 'info.cukes:cucumber-junit:' + cucuJunitVersion
 
     /**** Reporting ****/
     compile 'io.magentys:donut:0.0.1'
@@ -35,6 +35,17 @@ dependencies {
     compile 'org.yaml:snakeyaml:1.17'
     compile 'com.jayway.restassured:rest-assured:2.7.0'
 
+
+}
+
+
+task boom(type: Test) {
+    System.setProperty("browser", "chrome")
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+    useTestNG() {
+        suites 'src/test/resources/testSuites/ChromeTest.xml'
+    }
 }
 
 task chrome(type: Test) {

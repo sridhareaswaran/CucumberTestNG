@@ -4,18 +4,18 @@ import com.sri.selenium.driverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import static org.testng.Assert.assertEquals;
+
 /**
  * Created by sridhar.easwaran on 3/16/2017.
  */
 public class homePage extends basePage {
 
-    WebDriver driver= driverFactory.getDriver();
-
     public void open() {
         driver.get("https://www.google.co.in");
     }
 
-    public void searchFor(String text) {
+    public void searchFor(String text) throws Exception {
         driver.findElement(By.cssSelector("#lst-ib")).sendKeys(text);
         driver.findElement(By.cssSelector("#_fZl > span > svg")).click();
     }

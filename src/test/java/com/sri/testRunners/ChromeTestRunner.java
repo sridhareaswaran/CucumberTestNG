@@ -18,9 +18,9 @@ import java.util.Locale;
 
 @CucumberOptions(
         format = {"pretty", "json:cucu-report/chrome_json/chrome_json.json", "html:cucu-report/chrome"},
-        glue = {"com.sri.stepdefs","com.sri.hooks.chrome"},
-        features = {"src/test/resources/features/test_two.feature"},
-        tags = {"@smoke, @negative, @failing"}
+        glue = {"com.sri.stepdefs", "com.sri.hooks.chrome"},
+        features = {"src/test/resources/features/test_two.feature"}
+        //tags = {"@smoke, @negative, @failing"}
 )
 public class ChromeTestRunner extends AbstractTestNGCucumberTests {
 
@@ -84,6 +84,7 @@ public class ChromeTestRunner extends AbstractTestNGCucumberTests {
                         "CompanyName",     //project Name
                         "1.0"                         //project Version
                 );
+
     }
 }
 

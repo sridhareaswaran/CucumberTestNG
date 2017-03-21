@@ -22,7 +22,7 @@ import static com.sri.utils.logManager.log;
         format = {"pretty", "json:cucu-report/firefox_json/firefox_json.json", "html:cucu-report/firefox"},
         glue = {"com.sri.stepdefs","com.sri.hooks.firefox"},
         features = "src/test/resources/features",
-        tags = {"@smoke, @negative, @failing"}
+        tags = {"@web"}
 )
 public class FireFoxTestRunner extends AbstractTestNGCucumberTests {
 
