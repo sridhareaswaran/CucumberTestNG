@@ -39,6 +39,9 @@ test-reports/
 
 # IntelliJ
 /out/
+*.iml
+*.ipr
+*.iws
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
