@@ -33,6 +33,10 @@
 
 ## Plugin-specific files:
 
+# test report folder
+log/
+test-reports/
+
 # IntelliJ
 /out/
 
