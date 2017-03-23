@@ -1,9 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="CompanyName - Firefox" verbose="1">
-    <test name="firefox">
-        <parameter name="browser" value="firefox"/>
-        <classes>
-            <class name="com.sri.testRunners.FireFoxTestRunner"/>
-        </classes>
-    </test>
-</suite>

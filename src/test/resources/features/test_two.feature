@@ -9,7 +9,7 @@ Feature: Web Search
     When I search for 'duckduckgo'
     Then title should contain text 'DuckDuckGo'
 
-  @web
+  @webq
   Scenario: Movie Search with Title1
     Given I am on Google homepage
     When I search for 'duckduckgo'

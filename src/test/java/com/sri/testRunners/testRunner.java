@@ -17,18 +17,17 @@ import java.util.Locale;
  */
 
 @CucumberOptions(
-        format = {"pretty", "json:cucu-report/edge_json/edge_json.json", "html:cucu-report/edge"},
-        glue = {"com.sri.stepdefs","com.sri.hooks.edge"},
-        features = {"src/test/resources/features"},
-        //tags = {"@smoke, @regression, @negative, @failing"}
-        tags = {"@smoke, @negative, @failing"}
+        format = {"pretty", "json:build/cucu/report.json", "html:build/cucu"},
+        glue = {"com.sri.stepdefs"},
+        features = {"src/test/resources/features/test_two.feature"},
+        tags = {"@smoke, @negative, @failing, @web"}
 )
-public class EdgeTestRunner extends AbstractTestNGCucumberTests {
+public class testRunner extends AbstractTestNGCucumberTests {
 
     String baseDir = System.getProperty("user.dir");
-    String sourceDir = baseDir + "\\cucu-report\\edge_json";
-    String outputDir = baseDir + "\\test-report";
-    String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss", Locale.US).format(new Date());
+    String sourceDir = baseDir + "\\build\\cucu";
+    String outputDir = baseDir + "\\test-reports";
+    String timeStamp = new SimpleDateFormat("dd MMM HH.mm.ss", Locale.US).format(new Date());
 
     @BeforeSuite
     public void setUp() throws Exception {
@@ -69,13 +68,13 @@ public class EdgeTestRunner extends AbstractTestNGCucumberTests {
 
     @AfterSuite
     public void generateReport() throws InterruptedException {
-        logManager.log.info("Creating HTML report: Edge-" + timeStamp);
+        logManager.log.info("Please find HTML report at: " + timeStamp);
         Thread.sleep(5000);
         ReportConsole report =
                 Generator.apply(
                         sourceDir,                    //source dir
                         outputDir,                    //output dir
-                        "Edge-" + timeStamp,                      //fileNamePrefix
+                        timeStamp,                    //fileNamePrefix
                         "yyyy-MM-dd-HHmm",            //timestamp
                         "default",                    //template
                         false,                        //count Skipped As Failure
@@ -85,6 +84,7 @@ public class EdgeTestRunner extends AbstractTestNGCucumberTests {
                         "CompanyName",     //project Name
                         "1.0"                         //project Version
                 );
+
     }
 }
 

@@ -37,23 +37,27 @@ public class configReader {
         baseConfig_data = (HashMap<String, String>) yaml.load(baseConfig_IS);
         envConfig_data = (HashMap<String, HashMap<String, String>>) yaml.load(envConfig_IS);
 
-        /** Check ENV setup from command line, if not fetch from config file */
+        /** ENV setup **/
         if (System.getProperty("env") != null)
             ENV = System.getProperty("env");
         else
             ENV = baseConfig_data.get("TestEnvironment");
 
-        /** Check Browser setup from command line, if not fetch from config file */
+        /** Browser setup **/
         if (System.getProperty("browser") != null)
             BROWSER = System.getProperty("browser").toLowerCase();
         else
             BROWSER = baseConfig_data.get("Browser").toLowerCase();
 
-        /** Check RunTestIN (local/remote) setup from command line, if not fetch from config file */
-        if (System.getProperty("RunTestIN") != null)
-            RunTestsIn = System.getProperty("RunTestIN").toLowerCase();
+        logManager.log.info(BROWSER);
+
+        /** RunTestIN (local/remote) setup **/
+        if (System.getProperty("RunTestsIn") != null)
+            RunTestsIn = System.getProperty("RunTestsIn").toLowerCase();
         else
-            RunTestsIn = baseConfig_data.get("RunTestIN").toLowerCase();
+            RunTestsIn = baseConfig_data.get("RunTestsIn").toLowerCase();
+
+        logManager.log.info(RunTestsIn);
 
         /** get the current ENV details in to HashMap */
         current_Env_Data = envConfig_data.get(ENV);

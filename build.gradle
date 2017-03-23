@@ -35,50 +35,18 @@ dependencies {
     compile 'org.yaml:snakeyaml:1.17'
     compile 'com.jayway.restassured:rest-assured:2.7.0'
 
-
 }
-
 
 task boom(type: Test) {
+
     System.setProperty("browser", "chrome")
+    System.setProperty("env", "QA")
+    System.setProperty("RunTestsIn", "local")
+
     testLogging.showStandardStreams = true
     systemProperties System.getProperties()
     useTestNG() {
-        suites 'src/test/resources/testSuites/ChromeTest.xml'
-    }
-}
-
-task chrome(type: Test) {
-    System.setProperty("browser", name)
-    testLogging.showStandardStreams = true
-    systemProperties System.getProperties()
-    useTestNG() {
-        suites 'src/test/resources/testSuites/ChromeTest.xml'
-    }
-}
-
-task ff(type: Test) {
-    testLogging.showStandardStreams = true
-    systemProperties System.getProperties()
-    useTestNG() {
-        suites 'src/test/resources/testSuites/FirefoxTest.xml'
-    }
-}
-
-
-task edge(type: Test) {
-    testLogging.showStandardStreams = true
-    systemProperties System.getProperties()
-    useTestNG() {
-        suites 'src/test/resources/testSuites/EdgeTest.xml'
-    }
-}
-
-task cb(type: Test) {
-    testLogging.showStandardStreams = true
-    systemProperties System.getProperties()
-    useTestNG() {
-        suites 'src/test/resources/testSuites/CrossBrowserTest.xml'
+        suites 'src/test/resources/testSuites/TestNG.xml'
     }
 }
 

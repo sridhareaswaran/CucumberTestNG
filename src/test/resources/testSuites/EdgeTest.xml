@@ -1,9 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="CompanyName - Edge" verbose="1">
-    <test name="edge" >
-        <parameter name="browser" value="edge"/>
-        <classes>
-            <class name="com.sri.testRunners.EdgeTestRunner" />
-        </classes>
-    </test>
-</suite>

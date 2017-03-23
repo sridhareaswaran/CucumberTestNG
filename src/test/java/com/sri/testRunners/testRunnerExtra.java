@@ -12,72 +12,69 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import static com.sri.utils.logManager.log;
-
 /**
  * Created by Sridhar on 6/3/2016.
  */
 
 @CucumberOptions(
-        format = {"pretty", "json:cucu-report/firefox_json/firefox_json.json", "html:cucu-report/firefox"},
-        glue = {"com.sri.stepdefs","com.sri.hooks.firefox"},
-        features = "src/test/resources/features",
-        tags = {"@web"}
+        format = {"pretty", "json:build/cucu/report.json", "html:build/cucu"},
+        glue = {"com.sri.stepdefs"},
+        features = {"src/test/resources/features/test_two.feature"},
+        tags = {"@smoke, @negative, @failing, @web"}
 )
-public class FireFoxTestRunner extends AbstractTestNGCucumberTests {
+public class testRunnerExtra extends AbstractTestNGCucumberTests {
 
     String baseDir = System.getProperty("user.dir");
-    String sourceDir = baseDir + "\\cucu-report\\firefox_json";
-    String outputDir = baseDir + "\\test-report";
+    String sourceDir = baseDir + "\\build\\cucu";
+    String outputDir = baseDir + "\\test-reports\\donut";
+    String timeStamp = new SimpleDateFormat("dd MMM HH.mm.ss", Locale.US).format(new Date());
 
-    String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss", Locale.US).format(new Date());
-
-    @BeforeSuite(alwaysRun = true)
+    @BeforeSuite
     public void setUp() throws Exception {
         logManager.initLogManager();
-        log.info("before - Suite");
+        logManager.log.info("before - Suite");
         configReader.initConfigReader();
     }
 
     @BeforeTest(alwaysRun = true)
     public void bt() {
-        log.info("before - test");
+        logManager.log.info("before - test");
     }
 
     @AfterTest(alwaysRun = true)
     public void at() {
-        log.info("after - test");
+        logManager.log.info("after - test");
     }
 
     @BeforeMethod(alwaysRun = true)
     public void bm() {
-        log.info("before - method");
+        logManager.log.info("before - method");
     }
 
     @AfterMethod(alwaysRun = true)
     public void am() {
-        log.info("after - method");
+        logManager.log.info("after - method");
     }
 
     @BeforeClass(alwaysRun = true)
     public void bc() {
-        log.info("before - class");
+        logManager.log.info("before - class");
     }
 
     @AfterClass(alwaysRun = true)
     public void ac() {
-        log.info("after - class");
+        logManager.log.info("after - class");
     }
 
-    @AfterSuite(alwaysRun = true)
+    @AfterSuite
     public void generateReport() throws InterruptedException {
-        log.info("Creating HTML report: FF-" + timeStamp);
+        logManager.log.info("Please find HTML report at: " + timeStamp);
         Thread.sleep(5000);
         ReportConsole report =
                 Generator.apply(
                         sourceDir,                    //source dir
                         outputDir,                    //output dir
-                        "FF-" + timeStamp,               //fileNamePrefix
+                        timeStamp,                    //fileNamePrefix
                         "yyyy-MM-dd-HHmm",            //timestamp
                         "default",                    //template
                         false,                        //count Skipped As Failure
@@ -87,6 +84,7 @@ public class FireFoxTestRunner extends AbstractTestNGCucumberTests {
                         "CompanyName",     //project Name
                         "1.0"                         //project Version
                 );
+
     }
 }
 
