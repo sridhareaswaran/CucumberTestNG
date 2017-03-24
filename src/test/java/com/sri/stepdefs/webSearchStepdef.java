@@ -11,8 +11,8 @@ import cucumber.api.java.en.When;
  */
 public class webSearchStepdef {
 
-    com.sri.pages.homePage homePage = new homePage();
-    com.sri.pages.resultsPage resultsPage =new resultsPage();
+    homePage homePage = new homePage();
+    resultsPage resultsPage =new resultsPage();
 
     @Given("I am on Google homepage")
     public void i_am_on_Google_homepage() throws Throwable {
@@ -20,7 +20,7 @@ public class webSearchStepdef {
     }
 
     @When("I search for '(.*)'")
-    public void i_seach_for_something(String text) throws Throwable {
+    public void i_search_for_something(String text) throws Throwable {
         homePage.searchFor(text);
     }
 

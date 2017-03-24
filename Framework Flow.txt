@@ -12,7 +12,7 @@ before - Suite
 				after
 
 			after - method
-			
+
 			before - method
 
 				before

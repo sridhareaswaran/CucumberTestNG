@@ -23,6 +23,7 @@ public class hook extends driverFactory {
 
     @Before
     public void beforeScenario(Scenario scenario) throws MalformedURLException {
+        currentScenario=scenario;
         log.info("-----------------------  SCENARIO  -----------------------");
         log.info(scenario.getName());
         log.info("Starting " + BROWSER + " in " + RunTestsIn + " instance");

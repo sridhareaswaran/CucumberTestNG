@@ -1,5 +1,8 @@
 package com.sri.selenium;
 
+import cucumber.api.Scenario;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -27,6 +30,7 @@ public class driverFactory {
     protected static WebDriver driver;
     DesiredCapabilities capabilities;
     String baseDir = System.getProperty("user.dir");
+    public static Scenario currentScenario;
 
     public static WebDriver getDriver() {
         return driver;
@@ -92,5 +96,11 @@ public class driverFactory {
                 throw new IllegalArgumentException("Invalid browser type :" + browserType);
         }
     }
+
+    public static void smilePls(){
+        byte[] pic=((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+        currentScenario.embed(pic,"img.png");
+    }
+
 
 }
