@@ -56,7 +56,6 @@ public class driverFactory {
                 driver = new FirefoxDriver();
                 break;
             case "chrome":
-                log.info(">>> creating chrome local driver");
                 System.setProperty("webdriver.chrome.driver", baseDir + baseConfig_data.get("chromepath"));
                 driver = new ChromeDriver();
                 break;
@@ -97,10 +96,7 @@ public class driverFactory {
         }
     }
 
-    public static void smilePls(){
-        byte[] pic=((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        currentScenario.embed(pic,"img.png");
-    }
+
 
 
 }

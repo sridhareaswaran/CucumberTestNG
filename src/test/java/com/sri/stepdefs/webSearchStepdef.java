@@ -16,7 +16,7 @@ public class webSearchStepdef {
 
     @Given("I am on Google homepage")
     public void i_am_on_Google_homepage() throws Throwable {
-        homePage.open();
+        homePage.navigateTo("https://www.google.co.in");
     }
 
     @When("I search for '(.*)'")

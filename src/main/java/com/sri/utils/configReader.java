@@ -51,7 +51,7 @@ public class configReader {
 
         logManager.log.info(BROWSER);
 
-        /** RunTestIN (local/remote) setup **/
+        /** RunTestIN setup (local/remote) **/
         if (System.getProperty("RunTestsIn") != null)
             RunTestsIn = System.getProperty("RunTestsIn").toLowerCase();
         else
@@ -59,7 +59,7 @@ public class configReader {
 
         logManager.log.info(RunTestsIn);
 
-        /** get the current ENV details in to HashMap */
+        /** get the current ENV details in to HashMap **/
         current_Env_Data = envConfig_data.get(ENV);
     }
 
