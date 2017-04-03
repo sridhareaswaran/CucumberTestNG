@@ -8,6 +8,7 @@ import io.magentys.donut.gherkin.Generator;
 import io.magentys.donut.gherkin.model.ReportConsole;
 import org.testng.annotations.*;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -25,8 +26,8 @@ import java.util.Locale;
 public class testRunnerExtra extends AbstractTestNGCucumberTests {
 
     String baseDir = System.getProperty("user.dir");
-    String sourceDir = baseDir + "\\build\\cucu";
-    String outputDir = baseDir + "\\test-reports\\donut";
+    String sourceDir = baseDir + File.separator + "build" + File.separator + "cucu";
+    String outputDir = baseDir + File.separator + "test-reports";
     String timeStamp = new SimpleDateFormat("dd MMM HH.mm.ss", Locale.US).format(new Date());
 
     @BeforeSuite

@@ -2,6 +2,7 @@ package com.sri.utils;
 
 import org.yaml.snakeyaml.Yaml;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +18,9 @@ public class configReader {
     static InputStream baseConfig_IS = null;
     static InputStream envConfig_IS = null;
 
+    static String BASE_CONFIG_FILE = File.separator + "config" + File.separator + "baseConfig.yml";
+    static String ENV_CONFIG_FILE = File.separator + "config" + File.separator + "envConfig.yml";
+
     public static Map<String, String> baseConfig_data = new HashMap<>();
     public static Map<String, HashMap<String, String>> envConfig_data = new HashMap<String, HashMap<String, String>>();
     public static Map<String, String> current_Env_Data = new HashMap<>();
@@ -26,10 +30,8 @@ public class configReader {
 
     public static void initConfigReader() {
         try {
-
-            baseConfig_IS = configReader.class.getResourceAsStream("/config/baseConfig.yml");
-            envConfig_IS = configReader.class.getResourceAsStream("/config/envConfig.yml");
-
+            baseConfig_IS = configReader.class.getResourceAsStream(BASE_CONFIG_FILE);
+            envConfig_IS = configReader.class.getResourceAsStream(ENV_CONFIG_FILE);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -56,8 +58,6 @@ public class configReader {
             RunTestsIn = System.getProperty("RunTestsIn").toLowerCase();
         else
             RunTestsIn = baseConfig_data.get("RunTestsIn").toLowerCase();
-
-        logManager.log.info(RunTestsIn);
 
         /** get the current ENV details in to HashMap **/
         current_Env_Data = envConfig_data.get(ENV);

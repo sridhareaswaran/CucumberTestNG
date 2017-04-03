@@ -1,16 +1,14 @@
 package com.sri.selenium;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 /**
  * Created by sridhar.easwaran on 3/27/2017.
@@ -20,8 +18,9 @@ public class seleniumUtils extends driverFactory {
     public static void smilePls() {
         byte[] pic = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         currentScenario.embed(pic, "img.png");
-        WebElement sri = driver.findElement(By.name("sri"));
     }
+
+    static WebDriverWait wait = new WebDriverWait(driver, 20);
 
     public static WebElement $(By bySelector) {
         return driver.findElement(bySelector);
@@ -30,7 +29,6 @@ public class seleniumUtils extends driverFactory {
     public static void open(String url) {
         driver.get(url);
     }
-
 
     public static void refershPage() {
         driver.navigate().refresh();
@@ -110,17 +108,33 @@ public class seleniumUtils extends driverFactory {
         }
     }
 
-    public static WebElement waitUtil(By element, ExpectedConditions condition) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        WebElement webElement;
-        String elementState=condition.toString();
-        // TODO: 3/27/2017
-        switch (elementState){
-            //case
+    enum ElementState {
+        VISIBLE,
+        PRESENT,
+        CLICKABLE
+    }
+
+    public static ExpectedCondition<WebElement> waitUtil(By element, ElementState elementState) {
+
+        FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                .withTimeout(3, TimeUnit.MINUTES)
+                .pollingEvery(1, TimeUnit.SECONDS);
+
+        ExpectedCondition<WebElement> webElement = null;
+
+        switch (elementState) {
+            case VISIBLE:
+                webElement = wait.until(webDriver -> ExpectedConditions.visibilityOfElementLocated(element));
+                break;
+            case PRESENT:
+                webElement = wait.until(webDriver -> ExpectedConditions.presenceOfElementLocated(element));
+                break;
+            case CLICKABLE:
+                webElement = wait.until(webDriver -> ExpectedConditions.elementToBeClickable(element));
+                break;
+            default:
+                break;
         }
-
-        webElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("myDynamicElement")));
-
         return webElement;
     }
 
@@ -137,6 +151,15 @@ public class seleniumUtils extends driverFactory {
     }
 
     public static void waitUntil_PageTitleEquals(String title) {
+
+        FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                .withTimeout(1, TimeUnit.MINUTES)
+                .pollingEvery(1, TimeUnit.SECONDS);
+
+        wait.until(webDriver -> webDriver.getTitle().equals(title));
+    }
+
+    public static void waitUntil_PageTitleEwetquals(String title) {
 
         FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver)
                 .withTimeout(1, TimeUnit.MINUTES)
