@@ -50,6 +50,7 @@ pipeline {
     stage('PROD push') {
       steps {
         echo 'ta da !!!'
+        archiveArtifacts '/test-reports'
       }
     }
   }
